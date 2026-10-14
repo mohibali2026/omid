@@ -183,10 +183,7 @@ function Catalogue({
 
         {/* Category tabs on the left; filters, sort and search on the right (below on narrower screens). */}
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between xl:gap-8">
-          <nav
-            aria-label="Filter by category"
-            className="flex min-w-0 flex-1 gap-5 overflow-x-auto border-b border-hairline [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
+          <TabStrip label="Filter by category" activeKey={active ?? ""}>
             <Link
               href="/marketplace/products"
               aria-current={!active ? "page" : undefined}
@@ -204,7 +201,7 @@ function Catalogue({
                 {c.name}
               </Link>
             ))}
-          </nav>
+          </TabStrip>
 
           {/* Filters, sort and search. */}
           <div className="flex w-full items-center gap-2 sm:w-auto sm:shrink-0">
@@ -243,12 +240,12 @@ function Catalogue({
                 </span>
               )}
             </button>
-            <label className="relative shrink-0">
+            <label className="relative min-w-0 sm:shrink-0">
               <span className="sr-only">Sort by</span>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="h-10 appearance-none rounded-full bg-white pl-4 pr-9 text-[15px] text-neutral-900 outline-none! transition-shadow focus:shadow-[0_4px_16px_rgb(0_0_0/0.12)]"
+                className="h-10 max-w-full appearance-none rounded-full bg-white pl-4 pr-9 text-[15px] text-neutral-900 outline-none! transition-shadow focus:shadow-[0_4px_16px_rgb(0_0_0/0.12)]"
               >
                 {SORTS.map((so) => (
                   <option key={so.id} value={so.id}>
@@ -271,7 +268,7 @@ function Catalogue({
                 <path d="M2.5 4.5l3.5 3.5 3.5-3.5" />
               </svg>
             </label>
-            <label className="relative min-w-0 flex-1 sm:w-40 sm:flex-none">
+            <label className="relative min-w-[6.5rem] flex-1 sm:w-40 sm:flex-none">
               <span className="sr-only">Search products</span>
               <svg
                 width="16"
@@ -496,6 +493,113 @@ function Check({
   );
 }
 
+/**
+ * One-line strip of tabs that scrolls sideways. When tabs are hidden past an edge, that edge fades and shows an
+ * arrow (a mouse wheel can't scroll it), and the current tab is scrolled into view, e.g. after a category card.
+ */
+function TabStrip({
+  label,
+  activeKey,
+  children,
+}: {
+  label: string;
+  activeKey: string;
+  children: React.ReactNode;
+}) {
+  const nav = useRef<HTMLElement>(null);
+  const [edges, setEdges] = useState({ start: false, end: false });
+
+  useEffect(() => {
+    const el = nav.current;
+    if (!el) return;
+    const update = () =>
+      setEdges({
+        start: el.scrollLeft > 1,
+        end: el.scrollLeft + el.clientWidth < el.scrollWidth - 1,
+      });
+    el.addEventListener("scroll", update, { passive: true });
+    // Also reports the starting size, so the edges are known from the first frame.
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => {
+      el.removeEventListener("scroll", update);
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = nav.current;
+    const current = el?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!el || !current) return;
+    const box = el.getBoundingClientRect();
+    const tab = current.getBoundingClientRect();
+    if (tab.left < box.left || tab.right > box.right)
+      el.scrollLeft += tab.left - box.left - (box.width - tab.width) / 2;
+  }, [activeKey]);
+
+  const scroll = (direction: -1 | 1) =>
+    nav.current?.scrollBy({
+      left: direction * nav.current.clientWidth * 0.6,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+
+  return (
+    <div className="relative min-w-0 flex-1">
+      <nav
+        ref={nav}
+        aria-label={label}
+        className="flex gap-5 overflow-x-auto border-b border-hairline [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {children}
+      </nav>
+      {(["start", "end"] as const).map(
+        (edge) =>
+          edges[edge] && (
+            <div
+              key={edge}
+              className={`pointer-events-none absolute bottom-px top-0 flex w-16 items-center ${
+                edge === "start"
+                  ? "left-0 justify-start bg-linear-to-r"
+                  : "right-0 justify-end bg-linear-to-l"
+              } from-background from-40% to-transparent`}
+            >
+              {/* Pointer convenience only; keyboard users reach every tab with Tab. */}
+              <button
+                type="button"
+                tabIndex={-1}
+                aria-hidden="true"
+                onClick={() => scroll(edge === "start" ? -1 : 1)}
+                className="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-full bg-white text-neutral-900 shadow-[0_1px_3px_rgb(0_0_0/0.12),0_4px_12px_rgb(0_0_0/0.06)] transition-colors hover:text-label-2"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d={
+                      edge === "start"
+                        ? "M10 3.5L5.5 8l4.5 4.5"
+                        : "M6 3.5L10.5 8 6 12.5"
+                    }
+                  />
+                </svg>
+              </button>
+            </div>
+          ),
+      )}
+    </div>
+  );
+}
+
 const pageButton =
   "flex h-10 min-w-10 items-center justify-center rounded-full px-3 text-[15px] tabular-nums transition-colors";
 
@@ -547,13 +651,13 @@ function Pagination({
           onClick={() => onChange(n)}
           aria-label={`Page ${n}`}
           aria-current={n === page ? "page" : undefined}
-          // Phones show "x of y" instead of every number.
-          className={`${pageButton} hidden sm:flex ${n === page ? "bg-ink text-white" : "text-neutral-900 hover:bg-white"}`}
+          // Below lg, "x of y" replaces the numbers so the row stays on one line.
+          className={`${pageButton} hidden lg:flex ${n === page ? "bg-ink text-white" : "text-neutral-900 hover:bg-white"}`}
         >
           {n}
         </button>
       ))}
-      <p className="whitespace-nowrap px-1.5 text-[15px] tabular-nums text-label-2 sm:hidden">
+      <p className="whitespace-nowrap px-1.5 text-[15px] tabular-nums text-label-2 lg:hidden">
         <span className="sr-only">Page </span>
         <span className="font-semibold text-neutral-900">{page}</span> of{" "}
         {pageCount}
@@ -608,8 +712,28 @@ function FilterDrawer({
 
   useEffect(() => {
     if (!open) return;
+    // The Filters button, to hand focus back to when the drawer closes.
+    const opener = document.activeElement as HTMLElement | null;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close.current();
+      if (e.key !== "Tab" || !panel.current) return;
+      // Keep Tab inside the drawer: wrap from the last control to the first and back.
+      const items = [
+        ...panel.current.querySelectorAll<HTMLElement>(
+          "a[href], button:not([disabled]), input:not([disabled]), select",
+        ),
+      ];
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const at = document.activeElement;
+      if (e.shiftKey && (at === first || at === panel.current)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && at === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     const overflow = document.body.style.overflow;
@@ -618,6 +742,7 @@ function FilterDrawer({
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = overflow;
+      opener?.focus({ preventScroll: true });
     };
   }, [open]);
 
@@ -637,8 +762,11 @@ function FilterDrawer({
         aria-label="Filters"
         tabIndex={-1}
         inert={!open}
-        className={`absolute inset-y-0 left-0 flex w-[min(400px,100vw)] flex-col bg-white shadow-[0_0_40px_rgb(0_0_0/0.15)] outline-none transition-transform duration-300 ease-out motion-reduce:transition-none ${
-          open ? "translate-x-0" : "-translate-x-full"
+        className={`absolute inset-y-0 left-0 flex w-[min(400px,100vw)] flex-col bg-white outline-none transition-[translate,box-shadow] duration-300 ease-out motion-reduce:transition-none ${
+          // The shadow only while open, so it doesn't show along the screen edge when the drawer is away.
+          open
+            ? "translate-x-0 shadow-[0_0_40px_rgb(0_0_0/0.15)]"
+            : "-translate-x-full shadow-none"
         }`}
       >
         <div className="flex items-center justify-between border-b border-hairline px-6 py-4">

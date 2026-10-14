@@ -70,15 +70,10 @@ export function ArtisanPill({
         {shop.photo && (
           <Image
             src={shop.photo}
-            alt={hidden ? "" : (shop.photoAlt ?? `${shop.name} profile photo`)}
+            alt={hidden ? "" : `${shop.name} profile photo`}
             fill
             sizes="64px"
-            className={`object-cover transition-transform duration-500 ${
-              // Product photos have space around the piece, so zoom in to fill the circle.
-              shop.photoAlt
-                ? "scale-150 group-hover:scale-[1.58]"
-                : "group-hover:scale-105"
-            }`}
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         )}
       </span>
@@ -160,7 +155,7 @@ export function ArtisanRows({ shops }: { shops: Artisan[] }) {
                   } as React.CSSProperties
                 }
               >
-                {/* Two copies: the track moves by half (one copy of ten shops), wider than any screen. */}
+                {/* Two copies: the track moves by half (one copy of the row, six or seven shops), wider than any screen. */}
                 {[0, 1].flatMap((copy) =>
                   list.map((shop) => (
                     <ArtisanPill

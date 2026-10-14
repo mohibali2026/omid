@@ -22,13 +22,10 @@ export function ShopLogo({
       >
         <Image
           src={shop.photo}
-          alt={
-            decorative ? "" : (shop.photoAlt ?? `${shop.name} profile photo`)
-          }
+          alt={decorative ? "" : `${shop.name} profile photo`}
           fill
           sizes={sizes}
-          // Product photos (shops without a portrait) have space around the piece, so zoom in to fill the circle.
-          className={`object-cover ${shop.photoAlt ? "scale-150" : ""}`}
+          className="object-cover"
         />
       </div>
     );

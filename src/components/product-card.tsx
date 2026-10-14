@@ -8,7 +8,7 @@ import { QuickAdd } from "./quick-add";
 export function ProductCard({ product }: { product: Product }) {
   const shop = shops.find((s) => s.maker === product.maker);
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_8px_30px_rgb(0_0_0/0.05)] sm:rounded-3xl">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white has-[h2_a:focus-visible]:outline-2 has-[h2_a:focus-visible]:outline-offset-2 has-[h2_a:focus-visible]:outline-action shadow-[0_8px_30px_rgb(0_0_0/0.05)] sm:rounded-3xl">
       <div
         className="relative aspect-square overflow-hidden"
         style={{ backgroundColor: product.imageBg ?? "#f5f5f5" }}
@@ -31,10 +31,10 @@ export function ProductCard({ product }: { product: Product }) {
           className="truncate text-[21px] font-medium tracking-tight text-neutral-900"
           title={product.name}
         >
-          {/* The link covers the whole card. */}
+          {/* The link covers the whole card, and the card draws its focus ring (the truncated title would clip it). */}
           <Link
             href={`/marketplace/products/${product.slug}`}
-            className="after:absolute after:inset-0"
+            className="outline-none! after:absolute after:inset-0"
           >
             {product.name}
           </Link>

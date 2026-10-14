@@ -92,7 +92,7 @@ const coreProducts: Product[] = [
     slug: "embroidered-perahan-tunban",
     name: "Embroidered Perahan Tunban",
     category: "Menswear",
-    maker: "Najibullah's tailoring house",
+    maker: "Nazila's tailoring house",
     place: "Kabul",
     description:
       "The everyday cut of Afghan menswear, with a yoke worked in metallic thread.",
@@ -109,7 +109,7 @@ const coreProducts: Product[] = [
     slug: "panjara-side-table",
     name: "Panjara Side Table",
     category: "Woodwork",
-    maker: "Gul Ahmad and his brother",
+    maker: "Gulalai and her sister",
     place: "Nuristan",
     description:
       "A lattice cut the way window screens were cut, laid flat and given legs.",
@@ -143,7 +143,7 @@ const coreProducts: Product[] = [
     slug: "carved-side-table",
     name: "Carved Side Table",
     category: "Woodwork",
-    maker: "Gul Ahmad and his brother",
+    maker: "Gulalai and her sister",
     place: "Nuristan",
     description:
       "A small table with arched aprons and turned legs, carved by hand.",
@@ -161,7 +161,7 @@ const coreProducts: Product[] = [
     slug: "painted-keepsake-box",
     name: "Painted Keepsake Box",
     category: "Woodwork",
-    maker: "Gul Ahmad and his brother",
+    maker: "Gulalai and her sister",
     place: "Nuristan",
     description:
       "A square box with a carved star on the lid and flowers painted on the sides.",
@@ -179,7 +179,7 @@ const coreProducts: Product[] = [
     slug: "lattice-serving-tray",
     name: "Lattice Serving Tray",
     category: "Woodwork",
-    maker: "Gul Ahmad and his brother",
+    maker: "Gulalai and her sister",
     place: "Nuristan",
     description:
       "A rectangular tray with a cut geometric lattice base and handle slots.",
@@ -251,7 +251,7 @@ const coreProducts: Product[] = [
     slug: "navy-perahan-tunban",
     name: "Navy Perahan Tunban with Shawl",
     category: "Menswear",
-    maker: "Najibullah's tailoring house",
+    maker: "Nazila's tailoring house",
     place: "Kabul",
     description:
       "A navy tunic and trousers, worn with a woven shawl in red and white check.",
@@ -269,7 +269,7 @@ const coreProducts: Product[] = [
     slug: "green-perahan-tunban",
     name: "Green Perahan Tunban",
     category: "Menswear",
-    maker: "Najibullah's tailoring house",
+    maker: "Nazila's tailoring house",
     place: "Kabul",
     description:
       "A dark green set with a contrast yoke and a matching shoulder wrap.",
@@ -287,7 +287,7 @@ const coreProducts: Product[] = [
     slug: "brown-embroidered-perahan",
     name: "Brown Embroidered Perahan",
     category: "Menswear",
-    maker: "Najibullah's tailoring house",
+    maker: "Nazila's tailoring house",
     place: "Kabul",
     description:
       "A chocolate tunic with a gold-thread yoke, worn with loose trousers.",
@@ -574,7 +574,7 @@ const coreProducts: Product[] = [
     slug: "karakul-wool-hat",
     name: "Karakul Wool Hat",
     category: "Hats & Caps",
-    maker: "Ahmad Shah",
+    maker: "Arezo",
     place: "Balkh",
     description: "A classic folded hat in soft, curled grey karakul wool.",
     price: "$120",
@@ -591,7 +591,7 @@ const coreProducts: Product[] = [
     slug: "grey-wool-pakol",
     name: "Grey Wool Pakol",
     category: "Hats & Caps",
-    maker: "Ahmad Shah",
+    maker: "Arezo",
     place: "Balkh",
     description: "The rolled-brim wool cap of the mountains, felted by hand.",
     price: "$38",
@@ -608,7 +608,7 @@ const coreProducts: Product[] = [
     slug: "charcoal-felt-cap",
     name: "Charcoal Felt Cap",
     category: "Hats & Caps",
-    maker: "Ahmad Shah",
+    maker: "Arezo",
     place: "Balkh",
     description: "A round, structured cap in dense charcoal felt.",
     price: "$36",
@@ -643,7 +643,7 @@ const coreProducts: Product[] = [
     slug: "green-agate-drop-set",
     name: "Green Agate Drop Set",
     category: "Jewelry",
-    maker: "Mir Ahmad",
+    maker: "Mariam",
     place: "Badakhshan",
     description: "Teardrop silver frames holding polished green agate.",
     price: "$140",
@@ -660,7 +660,7 @@ const coreProducts: Product[] = [
     slug: "peridot-fan-pendant-set",
     name: "Peridot Fan Pendant Set",
     category: "Jewelry",
-    maker: "Mir Ahmad",
+    maker: "Mariam",
     place: "Badakhshan",
     description:
       "Fan-cut peridot on a fine silver chain, with matching earrings.",
@@ -696,7 +696,7 @@ const coreProducts: Product[] = [
     slug: "woven-leather-satchel",
     name: "Woven Leather Satchel",
     category: "Leather Bags",
-    maker: "Rahmatullah and his apprentices",
+    maker: "Roya and her apprentices",
     place: "Herat",
     description: "Tan leather with a hand-woven panel and a brass clasp.",
     price: "$135",
@@ -713,7 +713,7 @@ const coreProducts: Product[] = [
     slug: "brown-leather-briefcase",
     name: "Brown Leather Briefcase",
     category: "Leather Bags",
-    maker: "Rahmatullah and his apprentices",
+    maker: "Roya and her apprentices",
     place: "Herat",
     description: "A roomy briefcase with a front pocket and shoulder strap.",
     price: "$160",
@@ -730,7 +730,7 @@ const coreProducts: Product[] = [
     slug: "tan-leather-messenger",
     name: "Tan Leather Messenger",
     category: "Leather Bags",
-    maker: "Rahmatullah and his apprentices",
+    maker: "Roya and her apprentices",
     place: "Herat",
     description: "A soft tan messenger bag with an adjustable strap.",
     price: "$120",
@@ -747,7 +747,7 @@ const coreProducts: Product[] = [
     slug: "tan-leather-weekender",
     name: "Tan Leather Weekender",
     category: "Leather Bags",
-    maker: "Rahmatullah and his apprentices",
+    maker: "Roya and her apprentices",
     place: "Herat",
     description: "A stitched tan holdall, sized for a weekend away.",
     price: "$190",
@@ -782,7 +782,7 @@ const coreProducts: Product[] = [
     slug: "painted-medallion-plate",
     name: "Painted Medallion Plate",
     category: "Pottery",
-    maker: "Ustad Ghulam Sakhi",
+    maker: "Gulsoom",
     place: "Herat",
     description:
       "Terracotta painted by hand with a blue and gold star medallion.",
@@ -800,7 +800,7 @@ const coreProducts: Product[] = [
     slug: "speckled-amber-plate",
     name: "Speckled Amber Plate",
     category: "Pottery",
-    maker: "Ustad Karim",
+    maker: "Karima",
     place: "Kabul",
     description: "A warm amber glaze with dark speckles, fired in a wood kiln.",
     price: "$48",
@@ -836,7 +836,7 @@ const coreProducts: Product[] = [
 /*
  * More shops for the prototype. Placeholder data: names, stories and figures are invented, and each
  * product reuses an existing product photo (its category, colours and material come from that photo's
- * product). Each shop's profile picture is its first product's photo, so no faces are shown.
+ * product). Each shop has a stand-in headshot at /images/artisans/<slug>.jpg, like the original shops.
  */
 type ExtraShop = {
   name: string;
@@ -912,6 +912,20 @@ const extraShops: ExtraShop[] = [
         320,
         2,
       ],
+      [
+        "turquoise-medallion-rug",
+        "Balkh Medallion Rug",
+        "A central medallion in turquoise and rust.",
+        1050,
+        1,
+      ],
+      [
+        "red-ivory-lattice-rug",
+        "Red Border Rug",
+        "A bold red border around a quiet ivory field.",
+        460,
+        1,
+      ],
     ],
   },
   {
@@ -941,40 +955,13 @@ const extraShops: ExtraShop[] = [
       ],
     ],
   },
-  {
-    name: "Kunduz Kilim Works",
-    maker: "Abdul Basir and his apprentices",
-    province: "Kunduz",
-    story:
-      "Abdul Basir trains young weavers while they work, and every rug carries one apprentice's name.",
-    rating: 4.6,
-    sales: 164,
-    years: 27,
-    joined: "2024-11",
-    items: [
-      [
-        "turquoise-medallion-rug",
-        "Kunduz Medallion Rug",
-        "A central medallion in turquoise and rust.",
-        1050,
-        1,
-      ],
-      [
-        "red-ivory-lattice-rug",
-        "Red Border Rug",
-        "A bold red border around a quiet ivory field.",
-        460,
-        1,
-      ],
-    ],
-  },
   // Jewelry
   {
     name: "Badakhshan Stoneworks",
-    maker: "Mir Ahmad",
+    maker: "Mariam",
     province: "Badakhshan",
     story:
-      "Mir Ahmad cuts and sets mountain stones at a small bench, one ring at a time.",
+      "Mariam cuts and sets mountain stones at a small bench, one ring at a time.",
     rating: 4.9,
     sales: 96,
     years: 22,
@@ -994,19 +981,6 @@ const extraShops: ExtraShop[] = [
         240,
         2,
       ],
-    ],
-  },
-  {
-    name: "Kandahar Silversmiths",
-    maker: "Haji Nasrullah and his sons",
-    province: "Kandahar",
-    story:
-      "A father and his sons hammer, solder and polish silver in the workshop their grandfather opened.",
-    rating: 4.7,
-    sales: 302,
-    years: 34,
-    joined: "2024-03",
-    items: [
       [
         "emerald-silver-ring",
         "Silver Leaf Ring",
@@ -1055,19 +1029,6 @@ const extraShops: ExtraShop[] = [
         150,
         4,
       ],
-    ],
-  },
-  {
-    name: "Panjshir Stone Studio",
-    maker: "Fawad",
-    province: "Panjshir",
-    story:
-      "Fawad grew up near the valley's emerald mines and now cuts its stones for rings of his own design.",
-    rating: 4.8,
-    sales: 121,
-    years: 14,
-    joined: "2025-04",
-    items: [
       [
         "green-tourmaline-ring",
         "Tourmaline Solitaire",
@@ -1087,10 +1048,10 @@ const extraShops: ExtraShop[] = [
   // Pottery
   {
     name: "Shakardara Kilns",
-    maker: "Ustad Karim",
+    maker: "Karima",
     province: "Kabul",
     story:
-      "Ustad Karim throws on a kick wheel and fires in a wood kiln shared with two neighbouring potters.",
+      "Karima throws on a kick wheel and fires in a wood kiln shared with two neighbouring potters.",
     rating: 4.7,
     sales: 245,
     years: 31,
@@ -1137,14 +1098,28 @@ const extraShops: ExtraShop[] = [
         60,
         5,
       ],
+      [
+        "brown-bottle-vase",
+        "River Clay Bottle",
+        "A simple bottle in burnished river clay.",
+        55,
+        6,
+      ],
+      [
+        "green-glaze-teapot",
+        "Everyday Clay Teapot",
+        "A sturdy teapot for every day.",
+        65,
+        4,
+      ],
     ],
   },
   {
     name: "Herat Glaze Works",
-    maker: "Ustad Ghulam Sakhi",
+    maker: "Gulsoom",
     province: "Herat",
     story:
-      "Ustad Ghulam Sakhi mixes his own glazes from local minerals and keeps the recipes in a notebook.",
+      "Gulsoom mixes her own glazes from local minerals and keeps the recipes in a notebook.",
     rating: 4.9,
     sales: 178,
     years: 38,
@@ -1170,33 +1145,6 @@ const extraShops: ExtraShop[] = [
         "A ribbed jar with a pooled turquoise glaze.",
         90,
         2,
-      ],
-    ],
-  },
-  {
-    name: "Laghman River Pottery",
-    maker: "Noor Mohammad",
-    province: "Laghman",
-    story:
-      "Noor Mohammad digs his clay from the riverbank and makes the everyday pots his neighbours cook and serve with.",
-    rating: 4.5,
-    sales: 312,
-    years: 25,
-    joined: "2024-10",
-    items: [
-      [
-        "brown-bottle-vase",
-        "River Clay Bottle",
-        "A simple bottle in burnished river clay.",
-        55,
-        6,
-      ],
-      [
-        "green-glaze-teapot",
-        "Everyday Clay Teapot",
-        "A sturdy teapot for every day.",
-        65,
-        4,
       ],
     ],
   },
@@ -1230,10 +1178,10 @@ const extraShops: ExtraShop[] = [
   },
   {
     name: "Mazar Tailoring House",
-    maker: "Ahmad Shah",
+    maker: "Arezo",
     province: "Balkh",
     story:
-      "Ahmad Shah cuts every garment to the customer's measurements and sews it the same week.",
+      "Arezo cuts every garment to the customer's measurements and sews it the same week.",
     rating: 4.6,
     sales: 389,
     years: 17,
@@ -1253,19 +1201,6 @@ const extraShops: ExtraShop[] = [
         90,
         5,
       ],
-    ],
-  },
-  {
-    name: "Jalalabad Cotton Co.",
-    maker: "Zabiullah and his brothers",
-    province: "Nangarhar",
-    story:
-      "Three brothers make light cotton clothes for the heat of the east, cut and sewn in their own shop.",
-    rating: 4.7,
-    sales: 274,
-    years: 13,
-    joined: "2025-03",
-    items: [
       [
         "green-perahan-tunban",
         "Summer Cotton Set",
@@ -1318,65 +1253,11 @@ const extraShops: ExtraShop[] = [
   },
   // Woodwork
   {
-    name: "Paghman Joinery",
-    maker: "Ustad Habib",
-    province: "Kabul",
-    story:
-      "Ustad Habib builds lattice furniture without nails, fitting every joint by hand.",
-    rating: 4.9,
-    sales: 72,
-    years: 29,
-    joined: "2024-09",
-    items: [
-      [
-        "panjara-side-table",
-        "Paghman Lattice Table",
-        "A side table with a carved window lattice.",
-        390,
-        1,
-      ],
-      [
-        "lattice-serving-tray",
-        "Star Pattern Tray",
-        "A walnut tray with a star-pattern rim.",
-        120,
-        2,
-      ],
-    ],
-  },
-  {
-    name: "Kunar Cedar Carvers",
-    maker: "Sher Ali and his son",
-    province: "Kunar",
-    story:
-      "Sher Ali and his son carve cedar from the eastern forests into tables, boxes and trays.",
-    rating: 4.7,
-    sales: 98,
-    years: 24,
-    joined: "2025-01",
-    items: [
-      [
-        "carved-side-table",
-        "Cedar Pedestal Table",
-        "A carved pedestal table in fragrant cedar.",
-        440,
-        1,
-      ],
-      [
-        "painted-keepsake-box",
-        "Cedar Trinket Box",
-        "A small lidded box for keepsakes.",
-        65,
-        5,
-      ],
-    ],
-  },
-  {
     name: "Ghor Painted Woods",
     maker: "Nasima",
     province: "Ghor",
     story:
-      "Nasima paints flowers and birds onto small wooden pieces, each one by hand with a single fine brush.",
+      "Nasima carves walnut and cedar into tables, trays and boxes, and paints the smaller pieces with flowers and birds using a single fine brush.",
     rating: 4.8,
     sales: 115,
     years: 10,
@@ -1396,19 +1277,34 @@ const extraShops: ExtraShop[] = [
         95,
         2,
       ],
-    ],
-  },
-  {
-    name: "Logar Woodturners",
-    maker: "Hamidullah",
-    province: "Logar",
-    story:
-      "Hamidullah turns and carves walnut on a foot-powered lathe in his courtyard workshop.",
-    rating: 4.6,
-    sales: 83,
-    years: 18,
-    joined: "2025-10",
-    items: [
+      [
+        "panjara-side-table",
+        "Window Lattice Table",
+        "A side table with a carved window lattice.",
+        390,
+        1,
+      ],
+      [
+        "lattice-serving-tray",
+        "Star Pattern Tray",
+        "A walnut tray with a star-pattern rim.",
+        120,
+        2,
+      ],
+      [
+        "carved-side-table",
+        "Cedar Pedestal Table",
+        "A carved pedestal table in fragrant cedar.",
+        440,
+        1,
+      ],
+      [
+        "painted-keepsake-box",
+        "Cedar Trinket Box",
+        "A small lidded box for keepsakes.",
+        65,
+        5,
+      ],
       [
         "lattice-serving-tray",
         "Walnut Serving Tray",
@@ -1434,33 +1330,6 @@ const extraShops: ExtraShop[] = [
   },
   // Glassware
   {
-    name: "Old City Glass",
-    maker: "Ustad Naqib",
-    province: "Herat",
-    story:
-      "Ustad Naqib blows recycled glass into the cobalt blue the old city has been known for for centuries.",
-    rating: 4.9,
-    sales: 204,
-    years: 36,
-    joined: "2024-01",
-    items: [
-      [
-        "herat-blue-glass",
-        "Cobalt Bubble Vase",
-        "Bubbly cobalt glass, blown from recycled bottles.",
-        68,
-        4,
-      ],
-      [
-        "cobalt-footed-bowl",
-        "Deep Blue Dish",
-        "A footed dish in deep blue glass.",
-        82,
-        3,
-      ],
-    ],
-  },
-  {
     name: "Kabul Glass Atelier",
     maker: "Samira and Javid",
     province: "Kabul",
@@ -1485,19 +1354,20 @@ const extraShops: ExtraShop[] = [
         88,
         2,
       ],
-    ],
-  },
-  {
-    name: "Jawzjan Glassblowers",
-    maker: "Qadir and his nephews",
-    province: "Jawzjan",
-    story:
-      "Qadir taught his nephews to blow glass, and the three now share one wood-fired furnace.",
-    rating: 4.6,
-    sales: 91,
-    years: 21,
-    joined: "2025-05",
-    items: [
+      [
+        "herat-blue-glass",
+        "Cobalt Bubble Vase",
+        "Bubbly cobalt glass, blown from recycled bottles.",
+        68,
+        4,
+      ],
+      [
+        "cobalt-footed-bowl",
+        "Deep Blue Dish",
+        "A footed dish in deep blue glass.",
+        82,
+        3,
+      ],
       [
         "striped-carafe-set",
         "Striped Water Set",
@@ -1512,32 +1382,6 @@ const extraShops: ExtraShop[] = [
         64,
         3,
       ],
-    ],
-  },
-  // Leather
-  {
-    name: "Herat Leatherworks",
-    maker: "Rahmatullah and his apprentices",
-    province: "Herat",
-    story:
-      "Rahmatullah cuts, stitches and finishes every bag by hand, and teaches the craft to four young apprentices.",
-    rating: 4.8,
-    sales: 143,
-    years: 16,
-    joined: "2025-08",
-    items: [],
-  },
-  {
-    name: "Takhar Blue Glass",
-    maker: "Hasibullah",
-    province: "Takhar",
-    story:
-      "Hasibullah opened his furnace two years ago and makes bowls and cups in blue and amber.",
-    rating: 4.5,
-    sales: 46,
-    years: 6,
-    joined: "2026-05",
-    items: [
       [
         "cobalt-footed-bowl",
         "Footed Fruit Bowl",
@@ -1560,6 +1404,19 @@ const extraShops: ExtraShop[] = [
         2,
       ],
     ],
+  },
+  // Leather
+  {
+    name: "Herat Leatherworks",
+    maker: "Roya and her apprentices",
+    province: "Herat",
+    story:
+      "Roya cuts, stitches and finishes every bag by hand, and teaches the craft to four young apprentices.",
+    rating: 4.8,
+    sales: 143,
+    years: 16,
+    joined: "2025-08",
+    items: [],
   },
 ];
 
@@ -1787,8 +1644,6 @@ export type Shop = {
    * makers: replace with consented photos of each artisan (or remove) before launch.
    */
   photo?: string;
-  /** Alt text for the photo when it isn't a portrait (shops shown by a product photo). */
-  photoAlt?: string;
   /** Monogram for the fallback logo (shown when there's no photo), and its colours. */
   monogram: string;
   logoBg: string;
@@ -1853,11 +1708,11 @@ const shopList: Omit<Shop, "slug">[] = [
     joined: "2024-07",
   },
   {
-    name: "Najibullah Tailors",
-    maker: "Najibullah's tailoring house",
+    name: "Nazila Tailors",
+    maker: "Nazila's tailoring house",
     province: "Kabul",
     story:
-      "Najibullah's workshop cuts and sews perahan tunban to order, with yokes and cuffs embroidered by hand in cotton and metallic thread.",
+      "Nazila's workshop cuts and sews perahan tunban to order, with yokes and cuffs embroidered by hand in cotton and metallic thread.",
     monogram: "NT",
     logoBg: "#6fe3e1",
     logoFg: "#275264",
@@ -1870,10 +1725,10 @@ const shopList: Omit<Shop, "slug">[] = [
   },
   {
     name: "Nuristan Woodcraft",
-    maker: "Gul Ahmad and his brother",
+    maker: "Gulalai and her sister",
     province: "Nuristan",
     story:
-      "Gul Ahmad and his brother carve walnut and cedar in the lattice patterns of Nuristani windows, turning them into tables, trays and boxes for the home.",
+      "Gulalai and her sister carve walnut and cedar in the lattice patterns of Nuristani windows, turning them into tables, trays and boxes for the home.",
     monogram: "NW",
     logoBg: "#8a5a35",
     logoFg: "#fdf1c9",
@@ -1908,15 +1763,14 @@ const coreShops: Shop[] = shopList.map((s) => {
 });
 
 const moreShops: Shop[] = extraShops.map((s, i) => {
-  const lead = products.find((p) => p.maker === s.maker)!;
+  const slug = categorySlug(s.name);
   return {
-    slug: categorySlug(s.name),
+    slug,
     name: s.name,
     maker: s.maker,
     province: s.province,
     story: s.story,
-    photo: productImage(lead),
-    photoAlt: lead.alt,
+    photo: asset(`/images/artisans/${slug}.jpg`),
     monogram: s.name
       .split(/\s+/)
       .slice(0, 2)
