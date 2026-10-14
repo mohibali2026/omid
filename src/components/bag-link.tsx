@@ -11,11 +11,20 @@ const CART_ICON =
 const HEART_ICON =
   "M11.993 5.136c-2-2.338-5.333-2.966-7.838-.826s-2.858 5.719-.89 8.25c1.635 2.105 6.585 6.544 8.207 7.98.182.162.272.242.378.274a.5.5 0 0 0 .286 0c.106-.032.197-.112.378-.273 1.623-1.437 6.573-5.876 8.208-7.98 1.967-2.532 1.658-6.133-.89-8.251-2.549-2.118-5.84-1.512-7.839.826Z";
 
-function Icon({ d, size = 20 }: { d: string; size?: number }) {
+function Icon({
+  d,
+  size = 20,
+  className,
+}: {
+  d: string;
+  size?: number;
+  className?: string;
+}) {
   return (
     <svg
       width={size}
       height={size}
+      className={className}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -71,7 +80,7 @@ export function BagLink({ className = "" }: { className?: string }) {
     pathname === "/wishlist";
 
   return (
-    <div ref={ref} className="relative -mr-2">
+    <div ref={ref} className="relative -mr-1 sm:-mr-2">
       <button
         type="button"
         aria-expanded={open}
@@ -82,19 +91,22 @@ export function BagLink({ className = "" }: { className?: string }) {
             : "Cart and wishlist"
         }
         onClick={() => setOpen((v) => !v)}
-        className={`relative flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-[0_1px_3px_rgb(0_0_0/0.1),0_4px_12px_rgb(0_0_0/0.05)] transition-colors sm:h-12 sm:w-12 ${
+        // On phones the white circle matches the switcher's white thumb (36px) inside a 44px tap area.
+        className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors sm:h-12 sm:w-12 ${
           active ? "text-action" : "text-neutral-900 hover:text-label-2"
         } ${className}`}
       >
-        <Icon d={CART_ICON} />
-        {count > 0 && (
-          <span
-            aria-hidden="true"
-            className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-action px-1 text-[11px] font-semibold text-white ring-2 ring-background"
-          >
-            {count}
-          </span>
-        )}
+        <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-[0_1px_3px_rgb(0_0_0/0.1),0_4px_12px_rgb(0_0_0/0.05)] sm:h-12 sm:w-12">
+          <Icon d={CART_ICON} className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
+          {count > 0 && (
+            <span
+              aria-hidden="true"
+              className="absolute -right-1.5 -top-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-action px-1 text-[11px] font-semibold text-white ring-2 ring-background sm:-right-1 sm:-top-1"
+            >
+              {count}
+            </span>
+          )}
+        </span>
       </button>
 
       {open && (

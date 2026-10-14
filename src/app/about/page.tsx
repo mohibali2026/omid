@@ -33,7 +33,7 @@ const pillars = [
 
 export default function AboutPage() {
   return (
-    <main className="flex-1 px-4 pb-24 pt-20 sm:px-8 sm:pt-36 lg:px-14">
+    <main className="flex-1 px-4 pb-8 pt-20 sm:px-8 sm:pb-24 sm:pt-36 lg:px-14">
       <div className="mx-auto max-w-[1400px]">
         {/* Hero */}
         <div className="settle relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg sm:aspect-video sm:rounded-2xl">

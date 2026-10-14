@@ -26,7 +26,11 @@ export function ProductCard({ product }: { product: Product }) {
         <QuickAdd product={product} className="absolute right-4 top-4" />
       </div>
       <div className="flex flex-1 flex-col p-6 sm:p-7">
-        <h2 className="text-[21px] font-medium tracking-tight text-neutral-900">
+        {/* Title one line, maker one line, description two lines, so every card lines up. */}
+        <h2
+          className="truncate text-[21px] font-medium tracking-tight text-neutral-900"
+          title={product.name}
+        >
           {/* The link covers the whole card. */}
           <Link
             href={`/marketplace/products/${product.slug}`}
@@ -44,11 +48,14 @@ export function ProductCard({ product }: { product: Product }) {
               className="h-5 w-5 shrink-0 rounded-full"
             />
           )}
-          <span className="min-w-0">
+          <span
+            className="min-w-0 truncate"
+            title={`${product.maker} · ${product.place}`}
+          >
             {product.maker} · {product.place}
           </span>
         </div>
-        <p className="mt-3 text-[16px] leading-relaxed text-neutral-700">
+        <p className="mt-3 line-clamp-2 text-[16px] leading-relaxed text-neutral-700">
           {product.description}
         </p>
         <div className="mt-auto flex items-baseline justify-between pt-6">

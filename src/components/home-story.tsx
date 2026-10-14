@@ -6,7 +6,7 @@ import { Reveal } from "./reveal";
 /** Campaign section: the story on the left, the donation card on the right. */
 export function HomeStory() {
   return (
-    <section className="px-4 pb-24 pt-12 sm:px-8 sm:pt-16 lg:px-14">
+    <section className="px-4 pb-8 pt-12 sm:px-8 sm:pb-24 sm:pt-16 lg:px-14">
       <div className="mx-auto grid max-w-[1200px] items-start gap-8 md:grid-cols-[minmax(0,1fr)_360px] lg:grid-cols-[minmax(0,1fr)_444px] lg:gap-12">
         <Reveal>
           {/* Inset from the hero image edge so the story reads as its own block. */}

@@ -25,7 +25,12 @@ export type Product = {
 };
 
 export const categorySlug = (name: string) =>
-  name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // drop accents: "Décor" → "decor"
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 
 /** Where a product's photo lives. */
 export const productImage = (p: Product) =>
@@ -452,6 +457,379 @@ const coreProducts: Product[] = [
     material: "Glass",
     size: "Medium",
     imageFit: "cover",
+  },
+  {
+    slug: "emerald-velvet-dress",
+    name: "Emerald Velvet Dress",
+    category: "Womenswear",
+    maker: "An embroidery circle of eight women",
+    place: "Kandahar",
+    description:
+      "Green velvet with a hand-embroidered yoke and banded sleeves.",
+    price: "$260",
+    availability: "One only",
+    alt: "A woman in a long green velvet dress with a richly embroidered purple yoke and patterned sleeves.",
+    priceValue: 260,
+    stock: 1,
+    colors: ["Green", "Purple"],
+    material: "Velvet",
+    size: "Medium",
+    imageBg: "#8a8985",
+    imageFit: "cover",
+  },
+  {
+    slug: "purple-mirrorwork-dress",
+    name: "Purple Mirrorwork Dress",
+    category: "Womenswear",
+    maker: "An embroidery circle of eight women",
+    place: "Kandahar",
+    description:
+      "Deep purple cotton with mirrorwork, patchwork sleeves and an embroidered hem.",
+    price: "$290",
+    availability: "One only",
+    alt: "A woman in a long purple dress with colourful patchwork sleeves and a heavily embroidered skirt hem.",
+    priceValue: 290,
+    stock: 1,
+    colors: ["Purple", "Red"],
+    material: "Cotton",
+    size: "Medium",
+    imageBg: "#8d8988",
+    imageFit: "cover",
+  },
+  {
+    slug: "festival-patchwork-dress",
+    name: "Festival Patchwork Dress",
+    category: "Womenswear",
+    maker: "An embroidery circle of eight women",
+    place: "Kandahar",
+    description:
+      "A full-skirted dress pieced from embroidered panels in festival colours.",
+    price: "$340",
+    availability: "One only",
+    alt: "A long patchwork dress in purple, pink, green and red with an embroidered hem, shown on a mannequin.",
+    priceValue: 340,
+    stock: 1,
+    colors: ["Purple", "Red", "Green"],
+    material: "Cotton",
+    size: "Large",
+    imageBg: "#f2f2f2",
+  },
+  {
+    slug: "red-silk-embroidered-set",
+    name: "Red Silk Embroidered Set",
+    category: "Womenswear",
+    maker: "Malalai",
+    place: "Kunar",
+    description:
+      "A red silk tunic and trousers with a hand-stitched neckline and waistband.",
+    price: "$210",
+    availability: "2 available",
+    alt: "A woman in a red silk tunic and trousers with an embroidered neckline and waistband.",
+    priceValue: 210,
+    stock: 2,
+    colors: ["Red"],
+    material: "Silk",
+    size: "Medium",
+    imageBg: "#a6a39e",
+    imageFit: "cover",
+  },
+  {
+    slug: "green-gold-thread-dress",
+    name: "Green Gold-Thread Dress",
+    category: "Womenswear",
+    maker: "Malalai",
+    place: "Kunar",
+    description:
+      "Emerald silk woven with gold thread, with bell sleeves and a V-neck.",
+    price: "$230",
+    availability: "3 available",
+    alt: "A woman in a flowing emerald green dress patterned with gold thread and bell sleeves.",
+    priceValue: 230,
+    stock: 3,
+    colors: ["Green", "Gold"],
+    material: "Silk",
+    size: "Medium",
+    imageBg: "#b7b8ba",
+    imageFit: "cover",
+  },
+  {
+    slug: "embroidered-kandahari-cap",
+    name: "Embroidered Kandahari Cap",
+    category: "Hats & Caps",
+    maker: "An embroidery circle of eight women",
+    place: "Kandahar",
+    description:
+      "A round cap stitched in bright geometric thread, with a red tassel.",
+    price: "$45",
+    availability: "6 available",
+    alt: "A round cap densely embroidered in red, blue and green geometric patterns with a red tassel.",
+    priceValue: 45,
+    stock: 6,
+    colors: ["Red", "Turquoise"],
+    material: "Cotton",
+    size: "Small",
+    imageBg: "#f2f2f2",
+  },
+  {
+    slug: "karakul-wool-hat",
+    name: "Karakul Wool Hat",
+    category: "Hats & Caps",
+    maker: "Ahmad Shah",
+    place: "Balkh",
+    description: "A classic folded hat in soft, curled grey karakul wool.",
+    price: "$120",
+    availability: "3 available",
+    alt: "A folded grey hat made of curled karakul wool.",
+    priceValue: 120,
+    stock: 3,
+    colors: ["Grey"],
+    material: "Wool",
+    size: "Small",
+    imageBg: "#ffffff",
+  },
+  {
+    slug: "grey-wool-pakol",
+    name: "Grey Wool Pakol",
+    category: "Hats & Caps",
+    maker: "Ahmad Shah",
+    place: "Balkh",
+    description: "The rolled-brim wool cap of the mountains, felted by hand.",
+    price: "$38",
+    availability: "8 available",
+    alt: "A soft grey wool pakol cap with a rolled brim.",
+    priceValue: 38,
+    stock: 8,
+    colors: ["Grey"],
+    material: "Wool",
+    size: "Small",
+    imageBg: "#ffffff",
+  },
+  {
+    slug: "charcoal-felt-cap",
+    name: "Charcoal Felt Cap",
+    category: "Hats & Caps",
+    maker: "Ahmad Shah",
+    place: "Balkh",
+    description: "A round, structured cap in dense charcoal felt.",
+    price: "$36",
+    availability: "8 available",
+    alt: "A round charcoal grey felt cap.",
+    priceValue: 36,
+    stock: 8,
+    colors: ["Grey", "Black"],
+    material: "Wool",
+    size: "Small",
+    imageBg: "#f2f2f2",
+  },
+  {
+    slug: "carnelian-silver-set",
+    name: "Carnelian Silver Set",
+    category: "Jewelry",
+    maker: "Zahra",
+    place: "Ghazni",
+    description:
+      "Necklace, earrings and ring with red carnelian in scrolled silver.",
+    price: "$165",
+    availability: "2 available",
+    alt: "A silver necklace, pair of earrings and ring, each set with an oval red carnelian.",
+    priceValue: 165,
+    stock: 2,
+    colors: ["Red", "Silver"],
+    material: "Silver",
+    size: "Small",
+    imageBg: "#ffffff",
+  },
+  {
+    slug: "green-agate-drop-set",
+    name: "Green Agate Drop Set",
+    category: "Jewelry",
+    maker: "Mir Ahmad",
+    place: "Badakhshan",
+    description: "Teardrop silver frames holding polished green agate.",
+    price: "$140",
+    availability: "2 available",
+    alt: "A silver necklace and earrings with round green agate stones in teardrop frames.",
+    priceValue: 140,
+    stock: 2,
+    colors: ["Green", "Silver"],
+    material: "Silver",
+    size: "Small",
+    imageBg: "#e7e7e7",
+  },
+  {
+    slug: "peridot-fan-pendant-set",
+    name: "Peridot Fan Pendant Set",
+    category: "Jewelry",
+    maker: "Mir Ahmad",
+    place: "Badakhshan",
+    description:
+      "Fan-cut peridot on a fine silver chain, with matching earrings.",
+    price: "$150",
+    availability: "2 available",
+    alt: "A silver necklace and earrings with fan-shaped green peridot stones.",
+    priceValue: 150,
+    stock: 2,
+    colors: ["Green", "Silver"],
+    material: "Silver",
+    size: "Small",
+    imageBg: "#f0ebef",
+  },
+  {
+    slug: "amber-stone-halo-set",
+    name: "Amber Stone Halo Set",
+    category: "Jewelry",
+    maker: "Zahra",
+    place: "Ghazni",
+    description:
+      "Honey-coloured stones in silver halos: necklace, earrings and ring.",
+    price: "$180",
+    availability: "One only",
+    alt: "A silver necklace, earrings and ring, each with a square amber stone surrounded by small clear stones.",
+    priceValue: 180,
+    stock: 1,
+    colors: ["Amber", "Silver"],
+    material: "Silver",
+    size: "Small",
+    imageBg: "#e7e7e7",
+  },
+  {
+    slug: "woven-leather-satchel",
+    name: "Woven Leather Satchel",
+    category: "Leather Bags",
+    maker: "Rahmatullah and his apprentices",
+    place: "Herat",
+    description: "Tan leather with a hand-woven panel and a brass clasp.",
+    price: "$135",
+    availability: "3 available",
+    alt: "A tan leather satchel with a woven leather panel on the flap and a metal clasp.",
+    priceValue: 135,
+    stock: 3,
+    colors: ["Brown"],
+    material: "Leather",
+    size: "Medium",
+    imageBg: "#f2f1f7",
+  },
+  {
+    slug: "brown-leather-briefcase",
+    name: "Brown Leather Briefcase",
+    category: "Leather Bags",
+    maker: "Rahmatullah and his apprentices",
+    place: "Herat",
+    description: "A roomy briefcase with a front pocket and shoulder strap.",
+    price: "$160",
+    availability: "4 available",
+    alt: "A dark brown leather briefcase with top handles, a front pocket and a shoulder strap.",
+    priceValue: 160,
+    stock: 4,
+    colors: ["Brown"],
+    material: "Leather",
+    size: "Large",
+    imageBg: "#ffffff",
+  },
+  {
+    slug: "tan-leather-messenger",
+    name: "Tan Leather Messenger",
+    category: "Leather Bags",
+    maker: "Rahmatullah and his apprentices",
+    place: "Herat",
+    description: "A soft tan messenger bag with an adjustable strap.",
+    price: "$120",
+    availability: "5 available",
+    alt: "A tan leather messenger bag with a front pocket and an adjustable shoulder strap.",
+    priceValue: 120,
+    stock: 5,
+    colors: ["Brown"],
+    material: "Leather",
+    size: "Medium",
+    imageBg: "#ededed",
+  },
+  {
+    slug: "tan-leather-weekender",
+    name: "Tan Leather Weekender",
+    category: "Leather Bags",
+    maker: "Rahmatullah and his apprentices",
+    place: "Herat",
+    description: "A stitched tan holdall, sized for a weekend away.",
+    price: "$190",
+    availability: "2 available",
+    alt: "A tan leather weekender bag with two handles and a shoulder strap.",
+    priceValue: 190,
+    stock: 2,
+    colors: ["Brown"],
+    material: "Leather",
+    size: "Large",
+    imageBg: "#ebebeb",
+  },
+  {
+    slug: "blue-leaf-istalif-plate",
+    name: "Blue Leaf Istalif Plate",
+    category: "Pottery",
+    maker: "Ustad Rahimullah",
+    place: "Istalif",
+    description:
+      "A white-glazed plate brushed with cobalt leaves around a star centre.",
+    price: "$55",
+    availability: "4 available",
+    alt: "A round white ceramic plate painted with blue and green leaf strokes around a blue star centre.",
+    priceValue: 55,
+    stock: 4,
+    colors: ["Blue", "Green", "Ivory"],
+    material: "Ceramic",
+    size: "Medium",
+    imageBg: "#ffffff",
+  },
+  {
+    slug: "painted-medallion-plate",
+    name: "Painted Medallion Plate",
+    category: "Pottery",
+    maker: "Ustad Ghulam Sakhi",
+    place: "Herat",
+    description:
+      "Terracotta painted by hand with a blue and gold star medallion.",
+    price: "$120",
+    availability: "One only",
+    alt: "A terracotta plate hand-painted with a large blue, red and gold star medallion.",
+    priceValue: 120,
+    stock: 1,
+    colors: ["Blue", "Red", "Gold"],
+    material: "Ceramic",
+    size: "Large",
+    imageBg: "#ffffff",
+  },
+  {
+    slug: "speckled-amber-plate",
+    name: "Speckled Amber Plate",
+    category: "Pottery",
+    maker: "Ustad Karim",
+    place: "Kabul",
+    description: "A warm amber glaze with dark speckles, fired in a wood kiln.",
+    price: "$48",
+    availability: "5 available",
+    alt: "A round ceramic plate in a speckled amber-brown glaze.",
+    priceValue: 48,
+    stock: 5,
+    colors: ["Brown", "Amber"],
+    material: "Ceramic",
+    size: "Medium",
+    imageBg: "#ffffff",
+  },
+  {
+    slug: "lattice-garden-plate",
+    name: "Lattice Garden Plate",
+    category: "Pottery",
+    maker: "Ustad Rahimullah",
+    place: "Istalif",
+    description:
+      "A white plate painted with a blue lattice and green garden petals.",
+    price: "$60",
+    availability: "3 available",
+    alt: "A white ceramic plate painted with a blue lattice centre, green petals and a zigzag border.",
+    priceValue: 60,
+    stock: 3,
+    colors: ["Blue", "Green", "Ivory"],
+    material: "Ceramic",
+    size: "Medium",
+    imageBg: "#ffffff",
   },
 ];
 
@@ -1136,6 +1514,19 @@ const extraShops: ExtraShop[] = [
       ],
     ],
   },
+  // Leather
+  {
+    name: "Herat Leatherworks",
+    maker: "Rahmatullah and his apprentices",
+    province: "Herat",
+    story:
+      "Rahmatullah cuts, stitches and finishes every bag by hand, and teaches the craft to four young apprentices.",
+    rating: 4.8,
+    sales: 143,
+    years: 16,
+    joined: "2025-08",
+    items: [],
+  },
   {
     name: "Takhar Blue Glass",
     maker: "Hasibullah",
@@ -1226,6 +1617,7 @@ export const colorSwatches: Record<string, string> = {
   Silver: "#c0c4c8",
   Purple: "#7b4fb3",
   Amber: "#c98a1e",
+  Grey: "#8d9196",
 };
 
 export type Category = {
@@ -1238,9 +1630,23 @@ export type Category = {
   layout: string;
   /** Where the product shot sits inside the card. */
   imageBox: string;
+  /** Card colour, matched to the photo's own background so the shot reads edge to edge. */
+  background?: string;
+  /**
+   * Which products belong, for categories that cut across crafts (Kitchen & Dining, Gifts…).
+   * Without it, a category holds the products whose `category` is its name.
+   */
+  match?: (p: Product) => boolean;
 };
 
-/** Market Place categories, in mosaic order: wide, tall, tall / tall, tall, wide. */
+/** The photo a product uses, which identifies the kind of piece it is. */
+const photoOf = (p: Product) => p.image ?? p.slug;
+const withPhoto =
+  (...photos: string[]) =>
+  (p: Product) =>
+    photos.includes(photoOf(p));
+
+/** Market Place categories: two mosaics of six, each in the order wide, tall, tall / tall, tall, wide. */
 export const categories: Category[] = [
   {
     name: "Glassware",
@@ -1284,7 +1690,89 @@ export const categories: Category[] = [
     layout: "lg:col-span-2 lg:row-span-3",
     imageBox: "right-0 bottom-0 h-full w-1/2",
   },
+  // Second mosaic, same pattern as the first: wide, tall, tall / tall, tall, wide.
+  {
+    name: "Leather Bags",
+    count: 164,
+    image: asset("/images/products/tan-leather-weekender.jpg"),
+    layout: "lg:col-span-2 lg:row-span-3",
+    imageBox: "right-0 bottom-0 h-full w-1/2",
+    background: "#ededed",
+  },
+  {
+    name: "Womenswear",
+    count: 213,
+    image: asset("/images/products/festival-patchwork-dress.jpg"),
+    layout: "lg:row-span-4",
+    imageBox: "inset-x-0 bottom-0 h-[62%]",
+    background: "#f2f2f2",
+  },
+  {
+    name: "Hats & Caps",
+    count: 96,
+    image: asset("/images/products/embroidered-kandahari-cap.jpg"),
+    layout: "lg:row-span-4",
+    imageBox: "inset-x-0 bottom-0 h-[62%]",
+    background: "#f2f2f2",
+  },
+  {
+    name: "Jewelry Sets",
+    count: 148,
+    image: asset("/images/products/green-agate-drop-set.jpg"),
+    layout: "lg:row-span-4",
+    imageBox: "inset-x-0 bottom-0 h-[62%]",
+    background: "#e7e7e7",
+    match: withPhoto(
+      "carnelian-silver-set",
+      "green-agate-drop-set",
+      "peridot-fan-pendant-set",
+      "amber-stone-halo-set",
+    ),
+  },
+  {
+    name: "Kitchen & Dining",
+    count: 164,
+    image: asset("/images/products/green-glaze-teapot.jpg"),
+    layout: "lg:row-span-4",
+    imageBox: "inset-x-0 bottom-0 h-[62%]",
+    background: "#fbfcfe",
+    match: withPhoto(
+      "blue-leaf-istalif-plate",
+      "painted-medallion-plate",
+      "speckled-amber-plate",
+      "lattice-garden-plate",
+      "green-glaze-teapot",
+      "cobalt-footed-bowl",
+      "striped-carafe-set",
+      "amber-glass-tumblers",
+      "lattice-serving-tray",
+    ),
+  },
+  {
+    name: "Home Décor",
+    count: 233,
+    image: asset("/images/products/painted-keepsake-box.jpg"),
+    layout: "lg:col-span-2 lg:row-span-3",
+    imageBox: "right-0 bottom-0 h-full w-1/2",
+    background: "#ffffff",
+    match: withPhoto(
+      "painted-medallion-plate",
+      "painted-keepsake-box",
+      "fluted-turquoise-vase",
+      "istalif-turquoise-vase",
+      "brown-bottle-vase",
+      "lattice-serving-tray",
+      "herat-blue-glass",
+    ),
+  },
 ].map((c) => ({ ...c, slug: categorySlug(c.name) }));
+
+/** Whether a product belongs to the category with this slug. */
+export function inCategory(p: Product, slug: string) {
+  const category = categories.find((c) => c.slug === slug);
+  if (!category) return false;
+  return category.match ? category.match(p) : p.category === category.name;
+}
 
 export type Shop = {
   slug: string;
@@ -1420,7 +1908,7 @@ const coreShops: Shop[] = shopList.map((s) => {
 });
 
 const moreShops: Shop[] = extraShops.map((s, i) => {
-  const lead = extraProducts.find((p) => p.maker === s.maker)!;
+  const lead = products.find((p) => p.maker === s.maker)!;
   return {
     slug: categorySlug(s.name),
     name: s.name,

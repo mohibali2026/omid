@@ -30,7 +30,7 @@ type Params = { params: Promise<{ slug: string }> };
 // The story is read from the URL inside Suspense, so navigation shows the page frame immediately.
 export default function StoryPage({ params }: Params) {
   return (
-    <main className="flex-1 px-4 pb-24 pt-24 sm:px-8 sm:pt-36 lg:px-14">
+    <main className="flex-1 px-4 pb-8 pt-24 sm:px-8 sm:pb-24 sm:pt-36 lg:px-14">
       <Suspense fallback={<StorySkeleton />}>
         <StoryArticle params={params} />
       </Suspense>

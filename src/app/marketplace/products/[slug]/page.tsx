@@ -38,7 +38,7 @@ type Params = { params: Promise<{ slug: string }> };
 // The product is read from the URL inside Suspense, so navigation shows the page frame immediately.
 export default function ProductPage({ params }: Params) {
   return (
-    <main className="flex-1 px-4 pb-24 pt-24 sm:px-8 sm:pt-36 lg:px-14">
+    <main className="flex-1 px-4 pb-8 pt-24 sm:px-8 sm:pb-24 sm:pt-36 lg:px-14">
       <div className="mx-auto max-w-[1400px]">
         <Suspense fallback={<ProductSkeleton />}>
           <ProductDetails params={params} />
@@ -215,7 +215,7 @@ async function ProductDetails({ params }: Params) {
           >
             More from {shop.name}
           </h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {more.map((p, i) => (
               <Reveal key={p.slug} delay={i * 80} className="h-full">
                 <ProductCard product={p} />

@@ -123,7 +123,7 @@ export function ArtisanPill({
 }
 
 /**
- * Rows of shop pills drifting sideways in alternating directions, cropped by the screen edges.
+ * Rows of shop pills drifting sideways in alternating directions, cropped by the screen edges. Phones get a plain list instead.
  * Each row repeats its shops so the loop is seamless; with reduced motion the rows sit still and scroll by hand.
  */
 export function ArtisanRows({ shops }: { shops: Artisan[] }) {
@@ -135,36 +135,46 @@ export function ArtisanRows({ shops }: { shops: Artisan[] }) {
     return [...list.slice(start), ...list.slice(0, start)];
   });
   return (
-    <div className="flex flex-col gap-2 sm:gap-3">
-      {rows.map((list, row) => {
-        return (
-          <div
-            key={row}
-            className="marquee-row overflow-x-auto [scrollbar-width:none] motion-safe:overflow-hidden"
-          >
+    <>
+      {/* Phones: one shop per row, in a plain list. */}
+      <ul className="flex flex-col gap-3 px-4 sm:hidden">
+        {shops.map((shop) => (
+          <li key={shop.slug}>
+            <ArtisanPill shop={shop} className="w-full" />
+          </li>
+        ))}
+      </ul>
+      <div className="hidden flex-col gap-3 sm:flex">
+        {rows.map((list, row) => {
+          return (
             <div
-              className="marquee flex w-max gap-3 py-2 pl-3 sm:gap-4 sm:pl-4"
-              style={
-                {
-                  "--duration": `${55 + row * 12}s`,
-                  "--direction": row % 2 ? "reverse" : "normal",
-                } as React.CSSProperties
-              }
+              key={row}
+              className="marquee-row overflow-x-auto [scrollbar-width:none] motion-safe:overflow-hidden"
             >
-              {/* Two copies: the track moves by half (one copy of ten shops), wider than any screen. */}
-              {[0, 1].flatMap((copy) =>
-                list.map((shop) => (
-                  <ArtisanPill
-                    key={`${shop.slug}-${copy}`}
-                    shop={shop}
-                    hidden={copy > 0}
-                  />
-                )),
-              )}
+              <div
+                className="marquee flex w-max gap-3 py-2 pl-3 sm:gap-4 sm:pl-4"
+                style={
+                  {
+                    "--duration": `${55 + row * 12}s`,
+                    "--direction": row % 2 ? "reverse" : "normal",
+                  } as React.CSSProperties
+                }
+              >
+                {/* Two copies: the track moves by half (one copy of ten shops), wider than any screen. */}
+                {[0, 1].flatMap((copy) =>
+                  list.map((shop) => (
+                    <ArtisanPill
+                      key={`${shop.slug}-${copy}`}
+                      shop={shop}
+                      hidden={copy > 0}
+                    />
+                  )),
+                )}
+              </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 }

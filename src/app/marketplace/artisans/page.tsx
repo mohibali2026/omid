@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ArtisansPage() {
   return (
     // Full-bleed so the rows run off both edges of the screen.
-    <main className="flex flex-1 flex-col justify-center overflow-hidden pb-24 pt-28 sm:pt-44">
+    <main className="flex flex-1 flex-col justify-center overflow-hidden pb-8 pt-28 sm:pb-24 sm:pt-44">
       <header className="mx-auto max-w-4xl px-6 text-center">
         {/* Same type as the home hero: DM Serif title with sun-yellow italic accents. */}
         <h1 className="rise display text-balance text-[40px] text-ink sm:text-[56px] lg:text-[64px]">

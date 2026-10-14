@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 export default function CategoriesPage() {
   return (
-    <main className="flex-1 px-4 pb-24 pt-24 sm:px-8 sm:pt-36 lg:px-14">
+    <main className="flex-1 px-4 pb-8 pt-24 sm:px-8 sm:pb-24 sm:pt-36 lg:px-14">
       <div className="mx-auto max-w-[1400px]">
         <h1 className="sr-only">Categories</h1>
 
-        {/* Interlocking mosaic on desktop: a 4-column grid on 7 short rows (wide cards span 3, tall cards 4). */}
-        <div className="grid auto-rows-[320px] gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[repeat(7,96px)] lg:gap-6">
+        {/* Interlocking mosaic on desktop: 4 columns of short rows (wide cards span 3, tall cards 4); every six cards fill 7 rows, so the pattern repeats. */}
+        <div className="grid auto-rows-[320px] gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[96px] lg:gap-6">
           {categories.map((c, i) => (
             <Reveal
               key={c.slug}
@@ -24,9 +24,10 @@ export default function CategoriesPage() {
             >
               <Link
                 href={`/marketplace/products?category=${c.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-[#f5f5f5] p-6 shadow-[0_12px_30px_rgb(0_0_0/0.06)]"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl p-6 shadow-[0_12px_30px_rgb(0_0_0/0.06)]"
+                style={{ backgroundColor: c.background ?? "#f5f5f5" }}
               >
-                {/* The card is the shots' own #f5f5f5 studio colour, so each photo reads edge to edge. */}
+                {/* The card takes the shot's own studio colour, so each photo reads edge to edge. */}
                 <div className={`absolute ${c.imageBox}`}>
                   <Image
                     src={c.image}

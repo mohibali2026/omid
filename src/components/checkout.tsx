@@ -256,7 +256,7 @@ export function Checkout() {
         Checkout
       </h1>
 
-      <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
+      <div className="mt-8 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
         <form
           ref={formRef}
           onSubmit={submit}

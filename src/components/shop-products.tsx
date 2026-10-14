@@ -131,7 +131,7 @@ export function ShopProducts({ products }: { products: Product[] }) {
           No items match your search.
         </p>
       ) : (
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {shown.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}

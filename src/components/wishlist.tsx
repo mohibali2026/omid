@@ -48,7 +48,7 @@ export function Wishlist() {
       <p className="mt-2 text-[17px] text-label-2">
         {saved.length} saved {saved.length === 1 ? "piece" : "pieces"}
       </p>
-      <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {saved.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

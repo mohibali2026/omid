@@ -97,7 +97,7 @@ const tones = {
 
 export default function ImpactPage() {
   return (
-    <main className="flex-1 px-4 pb-24 pt-28 sm:px-8 sm:pt-44 lg:px-14">
+    <main className="flex-1 px-4 pb-8 pt-28 sm:px-8 sm:pb-24 sm:pt-44 lg:px-14">
       <div className="mx-auto max-w-[1200px]">
         {/* Same type as the Support hero: centred DM Serif title. */}
         <header className="mx-auto max-w-4xl text-center">
@@ -114,20 +114,23 @@ export default function ImpactPage() {
           </p>
         </header>
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Two cards to a row on phones, four on large screens; the two headline figures span a full row. */}
+        <ul className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 lg:grid-cols-4">
           {STATS.map((stat, i) => (
-            <li key={stat.label} className={stat.wide ? "sm:col-span-2" : ""}>
+            <li key={stat.label} className={stat.wide ? "col-span-2" : ""}>
               <Reveal delay={(i % 4) * 70} className="h-full">
                 <div
-                  className={`flex h-full flex-col justify-between rounded-3xl p-6 sm:p-7 ${tones[stat.tone ?? "default"]} ${
-                    stat.wide ? "min-h-[220px]" : "min-h-[200px]"
+                  className={`flex h-full flex-col justify-between rounded-3xl p-5 sm:p-7 ${tones[stat.tone ?? "default"]} ${
+                    stat.wide
+                      ? "min-h-[180px] sm:min-h-[220px]"
+                      : "min-h-[180px] sm:min-h-[200px]"
                   }`}
                 >
                   <p
                     className={`font-semibold leading-none tracking-[-0.04em] ${
                       stat.wide
-                        ? "text-[64px] sm:text-[80px]"
-                        : "text-[48px] sm:text-[56px]"
+                        ? "text-[56px] sm:text-[80px]"
+                        : "text-[40px] sm:text-[56px]"
                     }`}
                   >
                     <CountUp
@@ -136,12 +139,12 @@ export default function ImpactPage() {
                       suffix={stat.suffix}
                     />
                   </p>
-                  <div className="mt-6">
-                    <p className="text-[17px] font-semibold tracking-tight">
+                  <div className="mt-5 sm:mt-6">
+                    <p className="text-[15px] font-semibold leading-snug tracking-tight sm:text-[17px]">
                       {stat.label}
                     </p>
                     <p
-                      className={`mt-1 text-[14px] leading-snug ${stat.tone === "ink" ? "text-white/70" : stat.tone === "sun" ? "text-white/90" : "opacity-70"}`}
+                      className={`mt-1 text-[13px] leading-snug sm:text-[14px] ${stat.tone === "ink" ? "text-white/70" : stat.tone === "sun" ? "text-white/90" : "opacity-70"}`}
                     >
                       {stat.detail}
                     </p>
@@ -152,7 +155,7 @@ export default function ImpactPage() {
           ))}
         </ul>
 
-        <div className="mt-20 flex flex-col items-start justify-between gap-6 rounded-3xl bg-white p-8 sm:mt-28 sm:flex-row sm:items-center sm:p-10">
+        <div className="mt-4 flex flex-col items-start justify-between gap-6 rounded-3xl bg-white p-8 sm:flex-row sm:items-center sm:p-10">
           <div>
             <p className="heading text-[28px] text-neutral-900">
               Help us grow these numbers
