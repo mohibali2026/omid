@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Brand palette */
+  --color-ink: #275264;
+  --color-teal: #0097b2;
+  --color-aqua: #6fe3e1;
+  --color-sun: #fbbd03;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Roles. Contrast figures are against white unless noted. */
+  --color-label: #275264; /* primary text, 8.5:1 */
+  --color-label-2: #4f6b78; /* secondary text, 5.7:1 (5.2:1 on surface-2) */
+  --color-placeholder: #5f7a86; /* 4.6:1 */
+  --color-action: #00788e; /* links and primary buttons only, 5.2:1 */
+  --color-action-hover: #00667a; /* white on it, 6.6:1 */
+  --color-surface: #f6f5f8; /* page background */
+  --color-surface-2: #f4f6f7; /* alternating sections and tiles */
+  --color-hairline: #dfe5e8; /* decorative dividers */
+  --color-field: #748c97; /* input borders, 3.5:1 */
+
+  --color-background: var(--color-surface);
+  --color-foreground: var(--color-label);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-dm-serif);
+  --font-persian: var(--font-vazirmatn);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  /* Slightly tighter tracking across the site; everything inherits it. */
+  letter-spacing: -0.015em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-action);
+  outline-offset: 3px;
+}
+
+/* Titles: DM Serif Display, which ships in a single weight. */
+/* Titles outside the home page: Inter, set tight. DM Serif (display) is kept for the home page. */
+@utility heading {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+@utility display {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+/* Squircle corners (superellipse) where supported; plain rounded corners elsewhere. */
+@utility squircle {
+  border-radius: 12px;
+  @supports (corner-shape: squircle) {
+    border-radius: 22px;
+    corner-shape: squircle;
+  }
+}
+
+@utility persian {
+  font-family: var(--font-persian), system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* ---------- Motion ----------
+   One orchestrated entrance on page load (.rise, .settle) and quiet one-time reveals on scroll (.reveal).
+   Reduce Motion keeps the fades but drops all movement and scaling. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.rise {
+  animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.settle {
+  animation: settle 1200ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--delay, 0ms);
+}
+
+.reveal[data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Endless horizontal drift: the track holds two copies, so moving it half its width loops seamlessly. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee var(--duration, 60s) linear infinite;
+  animation-direction: var(--direction, normal);
+}
+
+/* Hold still while someone is pointing at or tabbing through a row. */
+.marquee-row:hover .marquee,
+.marquee-row:focus-within .marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+  .rise,
+  .settle {
+    animation-name: fade;
+    animation-duration: 400ms;
+  }
+  .reveal {
+    transform: none;
+    transition: opacity 400ms ease;
+  }
 }
