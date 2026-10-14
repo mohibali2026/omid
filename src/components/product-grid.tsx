@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   categories,
   categorySlug,
@@ -40,6 +40,8 @@ const SORTS = [
   { id: "price-desc", label: "Price: high to low" },
 ];
 
+const PAGE_SIZES = [12, 24, 48, 60];
+
 const unique = (values: string[]) => Array.from(new Set(values)).sort();
 const COLORS = unique(products.flatMap((p) => p.colors));
 const MATERIALS = unique(products.map((p) => p.material));
@@ -59,13 +61,13 @@ const EMPTY: Filters = {
   availability: [],
 };
 
-const chip = (active: boolean) =>
-  `flex h-10 items-center rounded-full px-4 text-[15px] transition-colors ${
+// Underline tabs: grey labels on a hairline, the current one dark with a bar beneath it.
+const tab = (active: boolean) =>
+  `-mb-px flex h-11 shrink-0 items-center whitespace-nowrap border-b-2 text-[16px] transition-colors ${
     active
-      ? "bg-ink text-white"
-      : "bg-white text-neutral-900 hover:bg-neutral-100"
+      ? "border-neutral-900 font-medium text-neutral-900"
+      : "border-transparent text-label-2 hover:text-neutral-900"
   }`;
-
 /** Products with a filter sidebar; the category lives in ?category= so it can be linked to. */
 export function ProductGrid() {
   const params = useSearchParams();
@@ -134,6 +136,30 @@ function Catalogue({
       return [...list].sort((a, b) => b.priceValue - a.priceValue);
     return list;
   }, [active, shop, filters, sort, query]);
+
+  // The page is tied to the current category, filters, sort, search and page size,
+  // so changing any of them starts again from page 1.
+  const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
+  const listKey = JSON.stringify([
+    active,
+    shopSlug,
+    filters,
+    sort,
+    query.trim(),
+    pageSize,
+  ]);
+  const [paging, setPaging] = useState({ key: listKey, page: 1 });
+  const pageCount = Math.max(1, Math.ceil(shown.length / pageSize));
+  const page = paging.key === listKey ? Math.min(paging.page, pageCount) : 1;
+  const visible = shown.slice((page - 1) * pageSize, page * pageSize);
+  const gridTop = useRef<HTMLDivElement>(null);
+  const goTo = (next: number) => {
+    setPaging({ key: listKey, page: next });
+    // Bring the top of the grid back into view, below the fixed header.
+    const top = gridTop.current?.getBoundingClientRect().top;
+    if (top !== undefined && top < 0)
+      window.scrollBy({ top: top - 120, behavior: "smooth" });
+  };
 
   return (
     <div className="lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
@@ -318,13 +344,16 @@ function Catalogue({
           </div>
         )}
 
-        {/* Category chips, with search on the right (below them on narrower screens). */}
-        <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
-          <nav aria-label="Filter by category" className="flex flex-wrap gap-2">
+        {/* Category tabs, with search on the right (below them on narrower screens). */}
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between xl:gap-8">
+          <nav
+            aria-label="Filter by category"
+            className="flex min-w-0 flex-1 gap-7 overflow-x-auto border-b border-hairline [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             <Link
               href="/marketplace/products"
               aria-current={!active ? "page" : undefined}
-              className={chip(!active)}
+              className={tab(!active)}
             >
               All
             </Link>
@@ -333,7 +362,7 @@ function Catalogue({
                 key={c.slug}
                 href={`/marketplace/products?category=${c.slug}`}
                 aria-current={active === c.slug ? "page" : undefined}
-                className={chip(active === c.slug)}
+                className={tab(active === c.slug)}
               >
                 {c.name}
               </Link>
@@ -386,17 +415,59 @@ function Catalogue({
             </button>
           </p>
         ) : (
-          <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {shown.map((product, i) => (
-              <Reveal
-                key={product.slug}
-                delay={(i % 3) * 100}
-                className="h-full"
-              >
-                <ProductCard product={product} />
-              </Reveal>
-            ))}
-          </div>
+          <>
+            <div
+              ref={gridTop}
+              className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+            >
+              {visible.map((product, i) => (
+                <Reveal
+                  key={product.slug}
+                  delay={(i % 3) * 100}
+                  className="h-full"
+                >
+                  <ProductCard product={product} />
+                </Reveal>
+              ))}
+            </div>
+            {/* Page size on the left, page numbers on the right. */}
+            <div className="mt-12 flex flex-wrap items-center justify-between gap-4">
+              <label className="flex items-center gap-3 text-[15px] text-label-2">
+                Show
+                <span className="relative">
+                  <select
+                    value={pageSize}
+                    onChange={(e) => setPageSize(Number(e.target.value))}
+                    className="h-10 appearance-none rounded-xl border border-field bg-white pl-3 pr-9 text-[15px] tabular-nums text-neutral-900 outline-none! transition-[border-color,box-shadow] focus:border-transparent focus:shadow-[0_4px_16px_rgb(0_0_0/0.1)]"
+                  >
+                    {PAGE_SIZES.map((n) => (
+                      <option key={n} value={n}>
+                        {n}
+                      </option>
+                    ))}
+                  </select>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-neutral-900"
+                  >
+                    <path d="M2.5 4.5l3.5 3.5 3.5-3.5" />
+                  </svg>
+                </span>
+                per page
+              </label>
+              {pageCount > 1 && (
+                <Pagination page={page} pageCount={pageCount} onChange={goTo} />
+              )}
+            </div>
+          </>
         )}
       </div>
     </div>
@@ -439,5 +510,74 @@ function Check({
       />
       {label}
     </label>
+  );
+}
+
+const pageButton =
+  "flex h-10 min-w-10 items-center justify-center rounded-full px-3 text-[15px] tabular-nums transition-colors";
+
+/** Previous / page numbers / Next. */
+function Pagination({
+  page,
+  pageCount,
+  onChange,
+}: {
+  page: number;
+  pageCount: number;
+  onChange: (page: number) => void;
+}) {
+  const arrow = (direction: -1 | 1) => (
+    <button
+      type="button"
+      onClick={() => onChange(page + direction)}
+      disabled={direction === -1 ? page === 1 : page === pageCount}
+      aria-label={direction === -1 ? "Previous page" : "Next page"}
+      className={`${pageButton} bg-white text-neutral-900 hover:bg-neutral-100 disabled:cursor-default disabled:text-neutral-300 disabled:hover:bg-white`}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path
+          d={
+            direction === -1 ? "M10 3.5L5.5 8l4.5 4.5" : "M6 3.5L10.5 8 6 12.5"
+          }
+        />
+      </svg>
+    </button>
+  );
+
+  return (
+    <nav
+      aria-label="Pages"
+      className="mt-12 flex items-center justify-center gap-2"
+    >
+      {arrow(-1)}
+      {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
+        <button
+          key={n}
+          type="button"
+          onClick={() => onChange(n)}
+          aria-label={`Page ${n}`}
+          aria-current={n === page ? "page" : undefined}
+          // Phones show "Page x of y" instead of every number.
+          className={`${pageButton} hidden sm:flex ${n === page ? "bg-ink text-white" : "text-neutral-900 hover:bg-white"}`}
+        >
+          {n}
+        </button>
+      ))}
+      <p className="px-2 text-[15px] tabular-nums text-label-2 sm:hidden">
+        Page <span className="font-semibold text-neutral-900">{page}</span> of{" "}
+        {pageCount}
+      </p>
+      {arrow(1)}
+    </nav>
   );
 }

@@ -12,6 +12,8 @@ import { donateHref } from "@/lib/campaign";
 const RAISED = 7099;
 const GOAL = 15000;
 const DONATIONS = 48;
+// Fewer donors than donations: some people give more than once (e.g. monthly).
+const DONORS = 41;
 const RECENT = [
   { name: "Farhad A.", amount: 100, ago: "2 h" },
   { name: "Mariam S.", amount: 50, ago: "1 d" },
@@ -93,23 +95,26 @@ export function DonationCard() {
         <div>
           <p className="text-[22px] leading-tight tracking-tight text-neutral-900">
             <span className="font-semibold">{usd(RAISED)} raised</span>{" "}
-            <span className="text-label-2">of {usd(GOAL)} USD</span>
+            <span className="text-[16px] text-label-2">of {usd(GOAL)}</span>
           </p>
-          <p className="mt-1 text-[14px] text-label-2">{DONATIONS} donations</p>
+          <p className="mt-1 text-[14px] text-label-2">
+            {DONATIONS} donations <span aria-hidden="true">·</span> {DONORS}{" "}
+            donors
+          </p>
         </div>
       </div>
 
       <div className="mt-6 flex flex-col gap-2.5">
         <a
           href={donateHref()}
-          className="flex h-12 items-center justify-center rounded-full bg-sun text-[16px] font-semibold text-ink transition-[filter] hover:brightness-95 active:scale-[0.99]"
+          className="flex h-12 items-center justify-center squircle bg-sun text-[16px] font-semibold text-ink transition-[filter] hover:brightness-95 active:scale-[0.99]"
         >
           Donate now
         </a>
         <button
           type="button"
           onClick={share}
-          className="flex h-12 items-center justify-center rounded-full bg-ink text-[16px] font-semibold text-white transition-colors hover:bg-action-hover active:scale-[0.99]"
+          className="flex h-12 items-center justify-center squircle bg-ink text-[16px] font-semibold text-white transition-colors hover:bg-action-hover active:scale-[0.99]"
         >
           {shareNote || "Share"}
         </button>
