@@ -23,7 +23,6 @@ export function ProductCard({ product }: { product: Product }) {
           }`}
         />
         <FavoriteToggle product={product} className="absolute left-4 top-4" />
-        <QuickAdd product={product} className="absolute right-4 top-4" />
       </div>
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         {/* Title one line, maker one line, description two lines, so every card lines up. */}
@@ -58,9 +57,10 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="mt-3 line-clamp-2 text-[16px] leading-relaxed text-neutral-700">
           {product.description}
         </p>
-        <div className="mt-auto flex items-baseline justify-between pt-6">
+        {/* Price with the add-to-cart button beside it; stock is shown on the product page. */}
+        <div className="mt-auto flex items-center justify-between gap-4 pt-6">
           <p className="text-[21px] text-neutral-900">{product.price}</p>
-          <p className="text-[15px] text-label-2">{product.availability}</p>
+          <QuickAdd product={product} />
         </div>
       </div>
     </article>

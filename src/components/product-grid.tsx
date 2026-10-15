@@ -686,7 +686,7 @@ function DrawerSection({
 }
 
 /**
- * Filters panel that slides in from the left, beside the filter button. Escape, the backdrop or the close button
+ * Filters panel that slides in from the right edge. Escape, the backdrop or the close button
  * close it; the page behind doesn't scroll while it's open.
  */
 function FilterDrawer({
@@ -762,11 +762,11 @@ function FilterDrawer({
         aria-label="Filters"
         tabIndex={-1}
         inert={!open}
-        className={`absolute inset-y-0 left-0 flex w-[min(400px,100vw)] flex-col bg-white outline-none transition-[translate,box-shadow] duration-300 ease-out motion-reduce:transition-none ${
+        className={`absolute inset-y-0 right-0 flex w-[min(400px,100vw)] flex-col bg-white outline-none transition-[translate,box-shadow] duration-300 ease-out motion-reduce:transition-none ${
           // The shadow only while open, so it doesn't show along the screen edge when the drawer is away.
           open
             ? "translate-x-0 shadow-[0_0_40px_rgb(0_0_0/0.15)]"
-            : "-translate-x-full shadow-none"
+            : "translate-x-full shadow-none"
         }`}
       >
         <div className="flex items-center justify-between border-b border-hairline px-6 py-4">

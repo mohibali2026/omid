@@ -63,9 +63,19 @@ async function ProductDetails({ params }: Params) {
   if (!product) notFound();
 
   const shop = shops.find((s) => s.maker === product.maker);
-  const more = products.filter(
-    (p) => p.maker === product.maker && p.slug !== product.slug,
-  );
+  // Four pieces under the product: the shop's own first, topped up from the same category, then anything.
+  const others = products.filter((p) => p.slug !== product.slug);
+  const fromShop = others.filter((p) => p.maker === product.maker);
+  const more = [
+    ...fromShop,
+    ...others.filter(
+      (p) => p.maker !== product.maker && p.category === product.category,
+    ),
+    ...others.filter(
+      (p) => p.maker !== product.maker && p.category !== product.category,
+    ),
+  ].slice(0, 4);
+  const allFromShop = fromShop.length >= 4;
   const details = [
     { label: "Material", value: product.material },
     { label: "Size", value: product.size },
@@ -207,15 +217,17 @@ async function ProductDetails({ params }: Params) {
         initial={reviewsFor(product.slug)}
       />
 
-      {more.length > 0 && shop && (
-        <section aria-labelledby="more-from-shop" className="mt-20 sm:mt-28">
+      {more.length > 0 && (
+        <section aria-labelledby="more-products" className="mt-20 sm:mt-28">
           <h2
-            id="more-from-shop"
+            id="more-products"
             className="heading text-[28px] text-neutral-900 sm:text-[36px]"
           >
-            More from {shop.name}
+            {allFromShop && shop
+              ? `More from ${shop.name}`
+              : "You may also like"}
           </h2>
-          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {more.map((p, i) => (
               <Reveal key={p.slug} delay={i * 80} className="h-full">
                 <ProductCard product={p} />
