@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { artisans } from "@/lib/products";
-import { TimeOnOmid } from "./time-on-omid";
 
 type Artisan = (typeof artisans)[number];
 
@@ -16,15 +15,9 @@ const ICONS = {
   rating: (
     <path d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6L8 1.8z" />
   ),
-  time: (
-    <>
-      <circle cx="8" cy="8" r="6.2" />
-      <path d="M8 4.6V8l2.3 1.5" />
-    </>
-  ),
 };
 
-/** A pill linking to a shop: round headshot, shop name, and its products, rating and time on Omid. */
+/** A pill linking to a shop: round headshot, shop name, and its products and rating. */
 export function ArtisanPill({
   shop,
   hidden,
@@ -44,11 +37,6 @@ export function ArtisanPill({
       value: `${shop.products.length} ${shop.products.length === 1 ? "product" : "products"}`,
     },
     { key: "rating", label: "Rating", value: shop.rating.toFixed(1) },
-    {
-      key: "time",
-      label: "Time on Omid",
-      value: <TimeOnOmid joined={shop.joined} />,
-    },
   ] as const;
   return (
     <Link
@@ -121,7 +109,14 @@ export function ArtisanPill({
  * Rows of shop pills drifting sideways in alternating directions, cropped by the screen edges. Phones get a plain list instead.
  * Each row repeats its shops so the loop is seamless; with reduced motion the rows sit still and scroll by hand.
  */
-export function ArtisanRows({ shops }: { shops: Artisan[] }) {
+export function ArtisanRows({
+  shops,
+  listOnPhones = true,
+}: {
+  shops: Artisan[];
+  /** Show phones a plain one-per-row list instead of the moving rows. */
+  listOnPhones?: boolean;
+}) {
   // Same shops in a different order per row, so neighbours don't line up.
   // Deal the shops into three rows, each starting at a different point so neighbours don't line up.
   const rows = [0, 1, 2].map((row) => {
@@ -131,15 +126,19 @@ export function ArtisanRows({ shops }: { shops: Artisan[] }) {
   });
   return (
     <>
-      {/* Phones: one shop per row, in a plain list. */}
-      <ul className="flex flex-col gap-3 px-4 sm:hidden">
-        {shops.map((shop) => (
-          <li key={shop.slug}>
-            <ArtisanPill shop={shop} className="w-full" />
-          </li>
-        ))}
-      </ul>
-      <div className="hidden flex-col gap-3 sm:flex">
+      {listOnPhones && (
+        // Phones: one shop per row, in a plain list.
+        <ul className="flex flex-col gap-3 px-4 sm:hidden">
+          {shops.map((shop) => (
+            <li key={shop.slug}>
+              <ArtisanPill shop={shop} className="w-full" />
+            </li>
+          ))}
+        </ul>
+      )}
+      <div
+        className={`flex-col gap-2 sm:flex sm:gap-3 ${listOnPhones ? "hidden" : "flex"}`}
+      >
         {rows.map((list, row) => {
           return (
             <div

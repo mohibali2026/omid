@@ -113,7 +113,7 @@ async function ProductDetails({ params }: Params) {
 
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14">
         <div
-          className="settle relative aspect-square overflow-hidden rounded-2xl sm:rounded-3xl lg:sticky lg:top-24"
+          className="settle relative aspect-square overflow-hidden rounded-2xl border border-[#e5e5e5] sm:rounded-3xl lg:sticky lg:top-24"
           style={{ backgroundColor: product.imageBg ?? "#f5f5f5" }}
         >
           <Image

@@ -8,7 +8,7 @@ import { QuickAdd } from "./quick-add";
 export function ProductCard({ product }: { product: Product }) {
   const shop = shops.find((s) => s.maker === product.maker);
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white has-[h2_a:focus-visible]:outline-2 has-[h2_a:focus-visible]:outline-offset-2 has-[h2_a:focus-visible]:outline-action shadow-[0_8px_30px_rgb(0_0_0/0.05)] sm:rounded-3xl">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white has-[h2_a:focus-visible]:outline-2 has-[h2_a:focus-visible]:outline-offset-2 has-[h2_a:focus-visible]:outline-action border border-[#e5e5e5] sm:rounded-3xl">
       <div
         className="relative aspect-square overflow-hidden"
         style={{ backgroundColor: product.imageBg ?? "#f5f5f5" }}
