@@ -22,7 +22,7 @@ export function ProductCard({ product }: { product: Product }) {
             product.imageFit === "cover" ? "object-cover" : "object-contain"
           }`}
         />
-        <FavoriteToggle product={product} className="absolute left-4 top-4" />
+        <FavoriteToggle product={product} className="absolute right-4 top-4" />
       </div>
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         {/* Title one line, maker one line, description two lines, so every card lines up. */}
